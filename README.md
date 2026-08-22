@@ -1,0 +1,8 @@
+Butterfly Effect Generator
+---------------------------------------
+The title says it all 😭
+Basically its a website where you input an event and a string of events get generator from that, and most of them are absurd 76.67% of the time.
+
+Tech Stack: HTML, CSS, and JS (as usual ✌️)
+-------------------------------------------------
+Basically this website works like this:  the input the user types in is classified by keywords, then generateChain() samples prewritten vocabulary with Math.random() and then it renders the final sentence. 
