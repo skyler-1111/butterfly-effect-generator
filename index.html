@@ -241,7 +241,8 @@ function escapeHTML(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
-}
+  }
+
 function analyseInput(text) {
   const clean = text
     .toLowerCase()
@@ -410,10 +411,9 @@ function analyseInput(text) {
     original: text,
     words: importantWords,
     anchor:
-      importantWords.length > 0
-        ? importantWords.slice(0, 3).join(" ")
-        : "the incident",
-
+    importantWords.length > 0
+    ? importantWords.slice(0, 2).join(" ")
+    : "incident",
     category
   };
 }
@@ -444,7 +444,7 @@ const VOCAB = {
     consequences: [
       "someone notices the situation",
       "the tiny incident becomes 230% harder to ignore",
-      "another person gets involved for absolutely no reason",
+      "Some random guy thinks you're having an emergency and dials 911",
       "the situation develops a life of its own",
       "a completely unnecessary chain of events begins",
       "an influencer ends up making a dance reel on it with a tuff bg music and it doesn't go viral",
@@ -840,7 +840,7 @@ function chooseStoryPattern(totalSteps) {
   const possible = STORY_PATTERNS
     .filter(pattern => pattern.length >= totalSteps);
   if (possible.length === 0) {
-    return shuffle(STORY_PATTERNS[0]).slice(0, totalSteps);
+    return STORY_PATTERNS[0].slice(0, totalSteps);
   }
   return random(possible).slice(0, totalSteps);
 }
@@ -858,7 +858,7 @@ function generateChain() {
   const analysis =
     analyseInput(rawInput);
   const totalSteps =
-    Math.floor(Math.random() * 5) + 4;
+    Math.floor(Math.random() * 4) + 5;
   
   const state = {
     original: analysis.original,
@@ -868,7 +868,12 @@ function generateChain() {
     usedPlaces: new Set(),
     usedConsequences: new Set(),
     usedDestinations: new Set(),
-    usedEndings: new Set()
+    usedEndings: new Set(),
+    previousEvent: null,
+    importantPerson: null,
+    emotionalTone: "normal",
+    weirdness: 0,
+    events: []
   };
 
   const vocab =
